@@ -1,0 +1,61 @@
+topview:
+	create table user(
+		user_id varchar(10) primary key,
+		password varchar(16)
+	);
+	create table folks(
+		folks_id varchar(10) primary key,
+		name varchar(20) default "",
+		birthday varchar(10) default 0,
+		hobby varchar(30) default "",
+		instruction varchar(30) default ""
+	);
+	create table admin(
+		admin_id varchar(10) default "" primary key,
+		instruction varchar(30) default ""
+	);
+	create table meloncircle(
+		circle_id int primary key auto_increment,
+		circle_name varchar(10) default "",
+		create_time timestamp DEFAULT CURRENT_TIMESTAMP,
+		hotdegree int default 0,
+		administrator_id varchar(10) default "",
+		constraint circle_admin foreign key (administrator_id) references admin(admin_id)
+	);
+	create table melon(
+		melon_id int primary key auto_increment,
+		title varchar(20) default "",
+		melontext text,
+		hotdegree int default 0,
+		belongcircle_id int default 0,
+		posttime timestamp NULL DEFAULT CURRENT_TIMESTAMP ,
+		melon_senter_id varchar(10) default ""
+	);
+		
+	create table folksmelon(
+		liker_id varchar(10) default "",
+		likedmelon_id int default 0
+	);
+	create table mail(
+		mail_id int primary key auto_increment,
+		mailsenter_id varchar(10) default "",
+		mailsolver_id varchar(10) default "",
+		mailtext text,
+		senttime timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
+		solvetime timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
+		solvetext text
+	);
+	create table comment(
+		commenter_id varchar(10) default "",
+		commented_melon int default 0,
+		commenttext text
+	);
+	alter table melon AUTO_INCREMENT=1;
+	alter table meloncircle AUTO_INCREMENT=1;
+	insert into admin values(12345,null);
+	insert into user values(12345,89012345);
+	insert into user values(123456789,89012345);
+	insert into user values(234567890,90123456);
+	insert into melon values(0,"郑爽张恒","阿巴阿巴",0,0,null,123456789);
+	insert into folks values(123456789,"普通群众","随便写",null,null);
+	insert into meloncircle values(0,"明星离婚",null,0,12345);
